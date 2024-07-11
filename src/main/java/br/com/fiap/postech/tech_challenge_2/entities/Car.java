@@ -3,33 +3,22 @@ package br.com.fiap.postech.tech_challenge_2.entities;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "cars")
 
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
     private String plate;
     private String model;
     private String color;
 
     public Car() {}
 
-    public Car(UUID id, String plate, String model, String color) {
+    public Car(String plate, String model, String color) {
         this.plate = plate;
         this.model = model;
         this.color = color;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getPlate() {
@@ -61,19 +50,18 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return Objects.equals(id, car.id) && Objects.equals(plate, car.plate) && Objects.equals(model, car.model) && Objects.equals(color, car.color);
+        return Objects.equals(plate, car.plate) && Objects.equals(model, car.model) && Objects.equals(color, car.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plate, model, color);
+        return Objects.hash(plate, model, color);
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
-                ", plate='" + plate + '\'' +
+                "plate='" + plate + '\'' +
                 ", model='" + model + '\'' +
                 ", color='" + color + '\'' +
                 '}';

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/car")
@@ -18,9 +17,9 @@ public class CarController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CarDTO> findById(@PathVariable UUID id) {
-        var cars = carService.findById(id);
+    @GetMapping("/{plate}")
+    public ResponseEntity<CarDTO> findById(@PathVariable String plate) {
+        var cars = carService.findById(plate);
         return ResponseEntity.ok(cars);
     }
 
