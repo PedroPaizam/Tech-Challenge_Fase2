@@ -19,6 +19,11 @@ public class ParkingMeter {
         this.address = address;
     }
 
+    public ParkingMeter(String address) {
+        this.id = UUID.randomUUID();
+        this.address = address;
+    }
+
     public UUID getId() {
         return id;
     }

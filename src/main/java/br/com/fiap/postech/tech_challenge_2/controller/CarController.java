@@ -1,7 +1,6 @@
 package br.com.fiap.postech.tech_challenge_2.controller;
 
 import br.com.fiap.postech.tech_challenge_2.dto.CarDTO;
-import br.com.fiap.postech.tech_challenge_2.entities.Car;
 import br.com.fiap.postech.tech_challenge_2.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;

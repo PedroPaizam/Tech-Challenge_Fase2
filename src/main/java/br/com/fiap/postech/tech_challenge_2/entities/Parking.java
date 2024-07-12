@@ -2,7 +2,6 @@ package br.com.fiap.postech.tech_challenge_2.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,7 +10,6 @@ import java.util.UUID;
 
 public class Parking {
     @Id
-    private UUID id;
     private String car_plate;
     private UUID parkingMeter_id;
     private String entry;
@@ -19,19 +17,11 @@ public class Parking {
 
     public Parking(){}
 
-    public Parking(UUID id, String car_plate, UUID parkingMeter_id, String entry, String exit){
+    public Parking(String car_plate, UUID parkingMeter_id, String entry, String exit){
         this.car_plate = car_plate;
         this.parkingMeter_id = parkingMeter_id;
         this.entry = entry;
         this.exit = exit;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getCar_plate() {
@@ -71,22 +61,21 @@ public class Parking {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parking parking = (Parking) o;
-        return Objects.equals(id, parking.id) && Objects.equals(car_plate, parking.car_plate) && Objects.equals(parkingMeter_id, parking.parkingMeter_id) && Objects.equals(entry, parking.entry) && Objects.equals(exit, parking.exit);
+        return Objects.equals(car_plate, parking.car_plate) && Objects.equals(parkingMeter_id, parking.parkingMeter_id) && Objects.equals(entry, parking.entry) && Objects.equals(exit, parking.exit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, car_plate, parkingMeter_id, entry, exit);
+        return Objects.hash(car_plate, parkingMeter_id, entry, exit);
     }
 
     @Override
     public String toString() {
         return "Parking{" +
-                "id=" + id +
-                ", car_plate='" + car_plate + '\'' +
+                "car_plate='" + car_plate + '\'' +
                 ", parkingMeter_id=" + parkingMeter_id +
-                ", entry=" + entry +
-                ", exit=" + exit +
+                ", entry='" + entry + '\'' +
+                ", exit='" + exit + '\'' +
                 '}';
     }
 }

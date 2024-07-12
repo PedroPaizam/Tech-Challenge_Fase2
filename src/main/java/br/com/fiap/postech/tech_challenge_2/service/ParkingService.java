@@ -14,29 +14,26 @@ public class ParkingService {
     @Autowired
     private ParkingRepository parkingRepository;
 
-    public ParkingDTO findById(UUID id){
-        var parking = parkingRepository.findById(id).orElse(null);
+    public ParkingDTO findById(String plate){
+        var parking = parkingRepository.findById(plate).orElse(null);
         assert parking != null;
         return toParkingDTO(parking);
     }
 
-    public ParkingDTO park(ParkingDTO parkingDTO){
+    public void park(ParkingDTO parkingDTO){
         var parking = toParking(parkingDTO);
         parkingRepository.save(parking);
-        return toParkingDTO(parking);
     }
 
     private ParkingDTO toParkingDTO(Parking parking){
-        return new ParkingDTO(parking.getId(),
-                parking.getCar_plate(),
+        return new ParkingDTO(parking.getCar_plate(),
                 parking.getParkingMeter_id(),
                 parking.getEntry(),
                 parking.getExit());
     }
 
     private Parking toParking(ParkingDTO parkingDTO){
-        return new Parking(parkingDTO.id(),
-                parkingDTO.car_plate(),
+        return new Parking(parkingDTO.car_plate(),
                 parkingDTO.parkingMeter_id(),
                 parkingDTO.entry(),
                 parkingDTO.exit());
