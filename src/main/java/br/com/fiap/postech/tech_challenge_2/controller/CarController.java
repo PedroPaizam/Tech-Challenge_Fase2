@@ -4,6 +4,7 @@ import br.com.fiap.postech.tech_challenge_2.dto.CarDTO;
 import br.com.fiap.postech.tech_challenge_2.entities.Car;
 import br.com.fiap.postech.tech_challenge_2.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,5 +27,11 @@ public class CarController {
     public ResponseEntity<Collection<CarDTO>> findAll() {
         var cars = carService.findAll();
         return ResponseEntity.ok(cars);
+    }
+
+    @PostMapping()
+    public ResponseEntity<CarDTO> create(@RequestBody CarDTO carDTO){
+        carDTO = carService.create(carDTO);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(carDTO);
     }
 }
