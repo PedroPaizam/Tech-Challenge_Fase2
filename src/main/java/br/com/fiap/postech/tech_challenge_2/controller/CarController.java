@@ -4,7 +4,6 @@ import br.com.fiap.postech.tech_challenge_2.dto.CarDTO;
 import br.com.fiap.postech.tech_challenge_2.entities.Car;
 import br.com.fiap.postech.tech_challenge_2.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +18,8 @@ public class CarController {
 
     @GetMapping("/{plate}")
     public ResponseEntity<CarDTO> findById(@PathVariable String plate) {
-        var cars = carService.findById(plate);
-        return ResponseEntity.ok(cars);
+        var car = carService.findById(plate);
+        return ResponseEntity.ok(car);
     }
 
     @GetMapping
