@@ -20,19 +20,21 @@ public class ParkingController {
 
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-    @PostMapping("/plate={plate};parkingMeter={id};hours={hours}")
-    public ResponseEntity<ParkingDTO> park(@PathVariable String plate, @PathVariable UUID id, @PathVariable int hours){
+    @PostMapping("/{plate}/{id}/{hours}")
+    public ResponseEntity<ParkingDTO> park(@PathVariable String plate, @PathVariable String id, @PathVariable int hours){
         String entry = LocalDateTime.now().format(dateTimeFormatter);
         String exit = LocalDateTime.now().plusHours(hours).format(dateTimeFormatter);
-        ParkingDTO parkingDTO = new ParkingDTO(plate, id, entry, exit);
+        UUID id2 = UUID.fromString(id);
+        ParkingDTO parkingDTO = new ParkingDTO(plate, id2, entry, exit);
         parkingService.park(parkingDTO);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(parkingDTO);
     }
 
-    @GetMapping("/isParked")
-    public ResponseEntity<Boolean> isParked(@RequestBody String plate){
+    @GetMapping("/isParked/{plate}")
+    public ResponseEntity<Boolean> isParked(@PathVariable String plate){
         var parked = parkingService.findById(plate);
-        boolean bool = LocalDateTime.parse(parked.exit()).isBefore(LocalDateTime.now());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        boolean bool = LocalDateTime.now().isBefore(LocalDateTime.parse(parked.exit(), dateTimeFormatter));
         return ResponseEntity.ok(bool);
     }
 }
